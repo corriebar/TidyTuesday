@@ -4,3 +4,4 @@ These are my contributions for the [#TidyTuesday challenge](https://github.com/r
 
 ### 2020
 - [Week 34 - Extinct Plants](plots/2020-34)
+- [Week 35 - Chopped](plots/2020-35)
