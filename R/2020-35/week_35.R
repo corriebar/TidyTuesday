@@ -1,12 +1,9 @@
 library(tidyverse)
-library(lubridate)
 library(ggtext)
 
 tuesdata <- tidytuesdayR::tt_load('2020-08-25')
 
-chopped <- tuesdata$chopped %>%
-  mutate(air_date = lubridate::parse_date_time(air_date, "%B %d, %Y", locale="en_US.utf8")) %>%
-  arrange(series_episode) 
+chopped <- tuesdata$chopped
 
 bgcolor <- "#E8E5DA"
 
