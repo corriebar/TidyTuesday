@@ -1,9 +1,6 @@
 library(tidyverse)
 library(lubridate)
 library(ggtext)
-#library(tidytext)
-#library(ggraph)
-#library(tidygraph)
 
 tuesdata <- tidytuesdayR::tt_load('2020-08-25')
 
