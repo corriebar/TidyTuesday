@@ -3,13 +3,19 @@ library(ggchicklet)
 library(pals)
 library(patchwork)
 
+
+#### Loading the data
 threats <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-08-18/threats.csv')
 
 
+
+##### Colors
 n_threat_types <- length(threats$threat_type %>% unique())
 pal <- ocean.curl(n_threat_types)
 bgcolor <- "#fcf6e9"
   
+
+##### Chicklet Plot
 p1 <- threats %>% 
   filter(threatened == 1 ) %>%
   mutate(threat_type = fct_infreq(threat_type) %>% 
@@ -50,6 +56,7 @@ p1 <- threats %>%
 
 
 
+####### Data Munging for Time Line Plot
 df_t <- threats %>% 
   filter(threatened == 1 & !is.na(year_last_seen )) %>% 
   mutate(threat_type = fct_infreq(threat_type) %>% 
@@ -64,6 +71,8 @@ df_t <- threats %>%
 
 threat_grid <- expand_grid(threat_type = unique(df_t$threat_type),
                            year_last_seen = unique(df_t$year_last_seen))
+
+###### Time Line Plot
 p2 <- df_t %>%
   full_join(threat_grid, by=c("year_last_seen", "threat_type")) %>%
   replace_na(list(n=0, perc=0)) %>% 
@@ -98,6 +107,9 @@ p2 <- df_t %>%
   ggsave(here::here("plots/2020-34/threats_over_time.png") , width = 8, height = 6  ) 
 
 
+
+
+######## Combine
 (p2 + p1 + plot_layout(nrow=2, 
                        heights = c(2, 1.5),
                        guides = "keep") +
