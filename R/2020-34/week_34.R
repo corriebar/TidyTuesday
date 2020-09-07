@@ -8,7 +8,6 @@ library(patchwork)
 threats <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-08-18/threats.csv')
 
 
-
 ##### Colors
 n_threat_types <- length(threats$threat_type %>% unique())
 pal <- ocean.curl(n_threat_types)
